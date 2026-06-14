@@ -204,3 +204,52 @@
   word-break: normal !important;
 }
 
+.repoBadge {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.repoLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.25rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.repoLink:hover {
+  background-color: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.externalIcon {
+  opacity: 0.6;
+  transition: opacity var(--transition-fast);
+}
+
+.repoLink:hover .externalIcon {
+  opacity: 1;
+}
+
+@media (max-width: 480px) {
+  .repoLink {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
