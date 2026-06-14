@@ -10,7 +10,8 @@ import {
   Cpu,
   Contrast,
   Workflow,
-  Box
+  Box,
+  X
 } from 'lucide-react';
 import styles from './ShowcasePage.module.css';
 
@@ -796,6 +797,14 @@ const ShowcaseCard: React.FC<ShowcaseItemProps> = ({
             <div className={styles.mathNotes}>
               <strong>Математичний зміст:</strong> {mathNotes}
             </div>
+            
+            <button 
+              className={`${styles.codeToggleBtnBottom} ${showCode ? styles.activeToggle : ''}`}
+              onClick={() => setShowCode(!showCode)}
+            >
+              <Code2 size={16} />
+              <span>{showCode ? 'Сховати код' : 'Вихідний код'}</span>
+            </button>
           </div>
         </div>
 
@@ -804,10 +813,16 @@ const ShowcaseCard: React.FC<ShowcaseItemProps> = ({
           <div className={styles.codeColumn}>
             <div className={styles.codeHeader}>
               <span className={styles.codeLang}>{webglDemo ? 'WebGL Shader & JS Code' : 'Asymptote Source Code'}</span>
-              <button className={styles.copyBtn} onClick={handleCopy}>
-                {copied ? <Check size={14} className={styles.copySuccess} /> : <Copy size={14} />}
-                <span>{copied ? 'Скопійовано!' : 'Копіювати'}</span>
-              </button>
+              <div className={styles.codeActions}>
+                <button className={styles.copyBtn} onClick={handleCopy}>
+                  {copied ? <Check size={14} className={styles.copySuccess} /> : <Copy size={14} />}
+                  <span>{copied ? 'Скопійовано!' : 'Копіювати'}</span>
+                </button>
+                <button className={styles.closeCodeBtn} onClick={() => setShowCode(false)} title="Сховати код">
+                  <X size={14} />
+                  <span>Сховати</span>
+                </button>
+              </div>
             </div>
             <div className={styles.codeBody}>
               <pre><code>{asyCode}</code></pre>
