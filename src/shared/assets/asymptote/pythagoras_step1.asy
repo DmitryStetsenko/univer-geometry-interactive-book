@@ -1,5 +1,7 @@
 settings.outformat="svg";
 size(300);
+import grid_helper;
+
 
 // Define triangle coordinates
 pair A = (0, 0);
@@ -36,3 +38,6 @@ label("$\mathbf{c = 5}$", (B+C)/2, align=NE);
 label("\large$\mathbf{a^2 = 9}$", (A+(-1.5, 1.5)), rgb(160, 15, 15));
 label("\large$\mathbf{b^2 = 16}$", (A+(2, -2)), rgb(15, 50, 150));
 label("\large$\mathbf{c^2 = 25}$", (A+(3.5, 3.5)), rgb(15, 110, 15));
+
+drawGrid(-4, 8, -5, 8);
+

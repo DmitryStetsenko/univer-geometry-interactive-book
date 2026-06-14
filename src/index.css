@@ -209,7 +209,13 @@ pre {
 
 @media (max-width: 768px) {
   .content-area {
-    padding: 1.5rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-area {
+    padding: 0.75rem;
   }
 }
 

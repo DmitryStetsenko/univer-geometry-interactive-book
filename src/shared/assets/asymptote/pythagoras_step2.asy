@@ -1,5 +1,7 @@
 settings.outformat="svg";
 size(300);
+import grid_helper;
+
 
 real a = 3;
 real b = 4;
@@ -46,3 +48,6 @@ label("$\mathbf{c=5}$", (s - b/2, s - a/2), align=SW);
 label("$\mathbf{c=5}$", (a/2, s - b/2), align=SE);
 
 label("\large$\mathbf{c^2 = 25}$", (s/2, s/2), rgb(15, 110, 15));
+
+drawGrid(-1, 8, -1, 8);
+

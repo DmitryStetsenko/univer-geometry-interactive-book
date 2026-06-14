@@ -1,5 +1,7 @@
 settings.outformat="svg";
 size(300);
+import grid_helper;
+
 
 real a = 3;
 real b = 4;
@@ -46,3 +48,6 @@ label("$\mathbf{b=4}$", (0, a + b/2), W);
 // Labels for inner areas
 label("\large$\mathbf{a^2 = 9}$", (b + a/2, a/2), rgb(160, 15, 15));
 label("\large$\mathbf{b^2 = 16}$", (b/2, a + b/2), rgb(15, 50, 150));
+
+drawGrid(-1, 8, -1, 8);
+
