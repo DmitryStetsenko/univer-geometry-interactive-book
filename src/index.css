@@ -40,30 +40,72 @@
   --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark Mode Variables */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #0b0f19;
-    --bg-secondary: #111827;
-    --bg-tertiary: #1f2937;
-    
-    --text-primary: #f8fafc;
-    --text-secondary: #cbd5e1;
-    --text-muted: #64748b;
-    
-    --primary: #818cf8;
-    --primary-hover: #6366f1;
-    --primary-light: #1e1b4b;
-    
-    --accent: #f472b6;
-    --accent-light: #4c0519;
-    
-    --border-color: #374151;
-    
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
-  }
+/* Dark Mode Theme Variable Overrides */
+:root[data-theme="dark"] {
+  --bg-primary: #0b0f19;
+  --bg-secondary: #111827;
+  --bg-tertiary: #1f2937;
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  
+  --primary: #818cf8;
+  --primary-hover: #6366f1;
+  --primary-light: #1e1b4b;
+  
+  --accent: #f472b6;
+  --accent-light: #4c0519;
+  
+  --border-color: #374151;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+}
+
+/* Custom Accent Color Overrides (Light Mode) */
+:root[data-accent="emerald"] {
+  --primary: #10b981;
+  --primary-hover: #059669;
+  --primary-light: #d1fae5;
+}
+:root[data-accent="amber"] {
+  --primary: #f59e0b;
+  --primary-hover: #d97706;
+  --primary-light: #fef3c7;
+}
+:root[data-accent="rose"] {
+  --primary: #f43f5e;
+  --primary-hover: #e11d48;
+  --primary-light: #ffe4e6;
+}
+:root[data-accent="sky"] {
+  --primary: #0ea5e9;
+  --primary-hover: #0284c7;
+  --primary-light: #e0f2fe;
+}
+
+/* Custom Accent Color Overrides (Dark Mode) */
+:root[data-theme="dark"][data-accent="emerald"] {
+  --primary: #34d399;
+  --primary-hover: #10b981;
+  --primary-light: #064e3b;
+}
+:root[data-theme="dark"][data-accent="amber"] {
+  --primary: #fbbf24;
+  --primary-hover: #f59e0b;
+  --primary-light: #78350f;
+}
+:root[data-theme="dark"][data-accent="rose"] {
+  --primary: #fb7185;
+  --primary-hover: #f43f5e;
+  --primary-light: #4c0519;
+}
+:root[data-theme="dark"][data-accent="sky"] {
+  --primary: #38bdf8;
+  --primary-hover: #0ea5e9;
+  --primary-light: #0c4a6e;
 }
 
 * {

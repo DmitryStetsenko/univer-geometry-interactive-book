@@ -354,3 +354,113 @@
 .fullscreenWrapper .zoomLevel {
   color: #ccc;
 }
+
+/* Drawing Backing Colors & Grid Configurations */
+.bgTheme {
+  background-color: var(--bg-primary);
+  transition: background-color var(--transition-normal);
+}
+
+.bgWhite {
+  background-color: #ffffff !important;
+  background-image: none !important;
+}
+
+.bgDark {
+  background-color: #0f172a !important;
+  background-image: none !important;
+}
+
+.bgGrid {
+  background-color: #ffffff !important;
+  background-image: 
+    linear-gradient(to right, rgba(99, 102, 241, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(99, 102, 241, 0.08) 1px, transparent 1px) !important;
+  background-size: 20px 20px !important;
+}
+
+:root[data-theme="dark"] .bgGrid {
+  background-color: #0f172a !important;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px) !important;
+}
+
+/* Floating background control panel in image wrapper */
+.bgControls {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 0.25rem;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  z-index: 10;
+  transition: all var(--transition-normal);
+}
+
+/* In fullscreen wrapper we adjust floating controllers layout slightly */
+.fullscreenWrapper .bgControls {
+  top: 2rem;
+  right: 2rem;
+  background-color: rgba(30, 30, 30, 0.85);
+  border-color: #444;
+}
+
+.bgControls button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 26px;
+  height: 26px;
+  border-radius: calc(var(--radius-sm) - 2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  color: var(--text-secondary);
+}
+
+.bgControls button:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--primary);
+}
+
+.fullscreenWrapper .bgControls button {
+  color: #ccc;
+}
+
+.fullscreenWrapper .bgControls button:hover {
+  background-color: #555;
+  color: #fff;
+}
+
+.activeBgBtn {
+  background-color: var(--primary-light) !important;
+  color: var(--primary) !important;
+}
+
+.fullscreenWrapper .activeBgBtn {
+  background-color: var(--primary) !important;
+  color: #fff !important;
+}
+
+.circlePreview {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+}
+
+.circleWhite {
+  background-color: #ffffff;
+}
+
+.circleDark {
+  background-color: #0f172a;
+}
+
