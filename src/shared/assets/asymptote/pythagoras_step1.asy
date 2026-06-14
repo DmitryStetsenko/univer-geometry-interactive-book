@@ -29,10 +29,10 @@ filldraw(A--B--C--cycle, rgb(245, 245, 245), black+2bp);
 draw((0,0.3)--(0.3,0.3)--(0.3,0), black+1bp);
 
 // Labels
-label("$a = 3$", (A+C)/2, E);
-label("$b = 4$", (A+B)/2, N);
-label("$c = 5$", (B+C)/2, align=NE);
+label("$\mathbf{a = 3}$", (A+C)/2, E);
+label("$\mathbf{b = 4}$", (A+B)/2, N);
+label("$\mathbf{c = 5}$", (B+C)/2, align=NE);
 
-label("$a^2 = 9$", (A+(-1.5, 1.5)), rgb(220, 50, 50));
-label("$b^2 = 16$", (A+(2, -2)), rgb(50, 100, 220));
-label("$c^2 = 25$", (A+(3.5, 3.5)), rgb(50, 180, 50));
+label("\large$\mathbf{a^2 = 9}$", (A+(-1.5, 1.5)), rgb(160, 15, 15));
+label("\large$\mathbf{b^2 = 16}$", (A+(2, -2)), rgb(15, 50, 150));
+label("\large$\mathbf{c^2 = 25}$", (A+(3.5, 3.5)), rgb(15, 110, 15));

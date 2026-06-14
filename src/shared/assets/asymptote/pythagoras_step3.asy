@@ -28,24 +28,21 @@ filldraw((0,a)--(b,a)--(b,s)--(0,s)--cycle, rgb(230, 240, 255), rgb(50, 100, 220
 
 // Labels for outer sides
 // Bottom side
-label("$b=4$", (b/2, 0), S);
-label("$a=3$", (b + a/2, 0), S);
+label("$\mathbf{b=4}$", (b/2, 0), S);
+label("$\mathbf{a=3}$", (b + a/2, 0), S);
 
 // Right side
-label("$a=3$", (s, a/2), E);
-label("$b=4$", (s, a + b/2), E);
+label("$\mathbf{a=3}$", (s, a/2), E);
+label("$\mathbf{b=4}$", (s, a + b/2), E);
 
 // Top side
-label("$b=4$", (b/2, s), N);
-label("$a=3$", (b + a/2, s), N);
+label("$\mathbf{b=4}$", (b/2, s), N);
+label("$\mathbf{a=3}$", (b + a/2, s), N);
 
 // Left side
-label("$a=3$", (0, a/2), W);
-label("$b=4$", (0, a + b/2), W);
+label("$\mathbf{a=3}$", (0, a/2), W);
+label("$\mathbf{b=4}$", (0, a + b/2), W);
 
 // Labels for inner areas
-label("$a^2$", (b + a/2, a/2), rgb(220, 50, 50));
-label("Area = 9", (b + a/2, a/2 - 0.4), rgb(220, 50, 50));
-
-label("$b^2$", (b/2, a + b/2), rgb(50, 100, 220));
-label("Area = 16", (b/2, a + b/2 - 0.4), rgb(50, 100, 220));
+label("\large$\mathbf{a^2 = 9}$", (b + a/2, a/2), rgb(160, 15, 15));
+label("\large$\mathbf{b^2 = 16}$", (b/2, a + b/2), rgb(15, 50, 150));

@@ -24,26 +24,25 @@ filldraw((b,0)--(s,b)--(a,s)--(0,a)--cycle, rgb(230, 255, 230), rgb(50, 180, 50)
 
 // Labels for sides on the outer border
 // Bottom side
-label("$b=4$", (b/2, 0), S);
-label("$a=3$", (b + a/2, 0), S);
+label("$\mathbf{b=4}$", (b/2, 0), S);
+label("$\mathbf{a=3}$", (b + a/2, 0), S);
 
 // Right side
-label("$b=4$", (s, b/2), E);
-label("$a=3$", (s, b + a/2), E);
+label("$\mathbf{b=4}$", (s, b/2), E);
+label("$\mathbf{a=3}$", (s, b + a/2), E);
 
 // Top side
-label("$b=4$", (s - b/2, s), N);
-label("$a=3$", (s - b - a/2, s), N);
+label("$\mathbf{b=4}$", (s - b/2, s), N);
+label("$\mathbf{a=3}$", (s - b - a/2, s), N);
 
 // Left side
-label("$b=4$", (0, s - b/2), W);
-label("$a=3$", (0, s - b - a/2), W);
+label("$\mathbf{b=4}$", (0, s - b/2), W);
+label("$\mathbf{a=3}$", (0, s - b - a/2), W);
 
 // Labels for inner hypotenuses and area
-label("$c=5$", (b/2, a/2), align=NE);
-label("$c=5$", (b + a/2, b/2), align=NW);
-label("$c=5$", (s - b/2, s - a/2), align=SW);
-label("$c=5$", (a/2, s - b/2), align=SE);
+label("$\mathbf{c=5}$", (b/2, a/2), align=NE);
+label("$\mathbf{c=5}$", (b + a/2, b/2), align=NW);
+label("$\mathbf{c=5}$", (s - b/2, s - a/2), align=SW);
+label("$\mathbf{c=5}$", (a/2, s - b/2), align=SE);
 
-label("$c^2$", (s/2, s/2), rgb(50, 180, 50));
-label("Area = 25", (s/2, s/2 - 0.4), rgb(50, 180, 50));
+label("\large$\mathbf{c^2 = 25}$", (s/2, s/2), rgb(15, 110, 15));
