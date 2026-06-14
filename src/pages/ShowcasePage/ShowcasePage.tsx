@@ -282,6 +282,112 @@ const WebGLCrystalDemo: React.FC = () => {
         axesColors.push(...color, ...color);
         indicesAxes.push(tickStartIdx, tickStartIdx + 1);
       });
+
+      // 1. Arrowhead (shows direction of the axis)
+      const arrowStartIdx = getVertexIdx();
+      const arrowLength = 0.08;
+      const arrowWidth = 0.03;
+
+      if (axisIndex === 0) {
+        // X-axis arrowhead (points towards +X)
+        const tip = [maxVal, 0, 0];
+        const p1 = [maxVal - arrowLength, arrowWidth, 0];
+        const p2 = [maxVal - arrowLength, -arrowWidth, 0];
+        const p3 = [maxVal - arrowLength, 0, arrowWidth];
+        const p4 = [maxVal - arrowLength, 0, -arrowWidth];
+
+        axesVertices.push(...tip, ...p1, ...tip, ...p2, ...tip, ...p3, ...tip, ...p4);
+        axesColors.push(...color, ...color, ...color, ...color, ...color, ...color, ...color, ...color);
+        indicesAxes.push(
+          arrowStartIdx, arrowStartIdx + 1,
+          arrowStartIdx + 2, arrowStartIdx + 3,
+          arrowStartIdx + 4, arrowStartIdx + 5,
+          arrowStartIdx + 6, arrowStartIdx + 7
+        );
+      } else if (axisIndex === 1) {
+        // Y-axis arrowhead (points towards +Y)
+        const tip = [0, maxVal, 0];
+        const p1 = [arrowWidth, maxVal - arrowLength, 0];
+        const p2 = [-arrowWidth, maxVal - arrowLength, 0];
+        const p3 = [0, maxVal - arrowLength, arrowWidth];
+        const p4 = [0, maxVal - arrowLength, -arrowWidth];
+
+        axesVertices.push(...tip, ...p1, ...tip, ...p2, ...tip, ...p3, ...tip, ...p4);
+        axesColors.push(...color, ...color, ...color, ...color, ...color, ...color, ...color, ...color);
+        indicesAxes.push(
+          arrowStartIdx, arrowStartIdx + 1,
+          arrowStartIdx + 2, arrowStartIdx + 3,
+          arrowStartIdx + 4, arrowStartIdx + 5,
+          arrowStartIdx + 6, arrowStartIdx + 7
+        );
+      } else if (axisIndex === 2) {
+        // Z-axis arrowhead (points towards +Z)
+        const tip = [0, 0, maxVal];
+        const p1 = [arrowWidth, 0, maxVal - arrowLength];
+        const p2 = [-arrowWidth, 0, maxVal - arrowLength];
+        const p3 = [0, arrowWidth, maxVal - arrowLength];
+        const p4 = [0, -arrowWidth, maxVal - arrowLength];
+
+        axesVertices.push(...tip, ...p1, ...tip, ...p2, ...tip, ...p3, ...tip, ...p4);
+        axesColors.push(...color, ...color, ...color, ...color, ...color, ...color, ...color, ...color);
+        indicesAxes.push(
+          arrowStartIdx, arrowStartIdx + 1,
+          arrowStartIdx + 2, arrowStartIdx + 3,
+          arrowStartIdx + 4, arrowStartIdx + 5,
+          arrowStartIdx + 6, arrowStartIdx + 7
+        );
+      }
+
+      // 2. Axis label (X, Y, Z letters drawn using 3D lines in the XY plane)
+      const labelStartIdx = getVertexIdx();
+      const labelOffset = maxVal + 0.12;
+      const size = 0.035;
+
+      if (axisIndex === 0) {
+        // Draw 'X' at [labelOffset, 0, 0]
+        const c = [labelOffset, 0, 0];
+        const p1 = [c[0] - size, c[1] - size, c[2]];
+        const p2 = [c[0] + size, c[1] + size, c[2]];
+        const p3 = [c[0] - size, c[1] + size, c[2]];
+        const p4 = [c[0] + size, c[1] - size, c[2]];
+
+        axesVertices.push(...p1, ...p2, ...p3, ...p4);
+        axesColors.push(...color, ...color, ...color, ...color);
+        indicesAxes.push(
+          labelStartIdx, labelStartIdx + 1,
+          labelStartIdx + 2, labelStartIdx + 3
+        );
+      } else if (axisIndex === 1) {
+        // Draw 'Y' at [0, labelOffset, 0]
+        const c = [0, labelOffset, 0];
+        const p1 = [c[0] - size, c[1] + size, c[2]];
+        const pCenter = [c[0], c[1], c[2]];
+        const p2 = [c[0] + size, c[1] + size, c[2]];
+        const p3 = [c[0], c[1] - size, c[2]];
+
+        axesVertices.push(...p1, ...pCenter, ...p2, ...pCenter, ...pCenter, ...p3);
+        axesColors.push(...color, ...color, ...color, ...color, ...color, ...color);
+        indicesAxes.push(
+          labelStartIdx, labelStartIdx + 1,
+          labelStartIdx + 2, labelStartIdx + 3,
+          labelStartIdx + 4, labelStartIdx + 5
+        );
+      } else if (axisIndex === 2) {
+        // Draw 'Z' at [0, 0, labelOffset]
+        const c = [0, 0, labelOffset];
+        const p1 = [c[0] - size, c[1] + size, c[2]];
+        const p2 = [c[0] + size, c[1] + size, c[2]];
+        const p3 = [c[0] - size, c[1] - size, c[2]];
+        const p4 = [c[0] + size, c[1] - size, c[2]];
+
+        axesVertices.push(...p1, ...p2, ...p2, ...p3, ...p3, ...p4);
+        axesColors.push(...color, ...color, ...color, ...color, ...color, ...color);
+        indicesAxes.push(
+          labelStartIdx, labelStartIdx + 1,
+          labelStartIdx + 2, labelStartIdx + 3,
+          labelStartIdx + 4, labelStartIdx + 5
+        );
+      }
     };
 
     // Add X-axis (Red)
