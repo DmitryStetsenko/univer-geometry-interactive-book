@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Navbar } from './widgets/Navbar/Navbar';
 import { Sidebar } from './widgets/Sidebar/Sidebar';
@@ -10,28 +11,38 @@ import { AboutPage } from './pages/AboutPage/AboutPage';
  * and lays out the FSD layers (Navbar, Sidebar, Pages).
  */
 function App() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <HashRouter>
       <div className="app-container">
         {/* Universal Top Navigation Header */}
-        <Navbar />
+        <Navbar onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         <div className="main-layout">
+          {/* Collapsible Sidebar Overlay */}
+          <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+
+          {/* Backdrop for closing the sidebar when clicking outside */}
+          {isSidebarOpen && (
+            <div 
+              className="sidebar-backdrop" 
+              onClick={() => setIsSidebarOpen(false)} 
+            />
+          )}
+
           <Routes>
-            {/* Textbook Route Group with index sidebar navigation */}
+            {/* Textbook Route Group */}
             <Route 
               path="/topic/:topicId" 
               element={
-                <>
-                  <Sidebar />
-                  <main className="content-area">
-                    <TopicDetailPage />
-                  </main>
-                </>
+                <main className="content-area">
+                  <TopicDetailPage />
+                </main>
               } 
             />
 
-            {/* About Page: Full-width layout without sidebar */}
+            {/* About Page: Full-width layout */}
             <Route 
               path="/about" 
               element={
