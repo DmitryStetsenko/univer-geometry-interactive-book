@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Compass, BookOpen, Info, Menu, Palette, Sun, Moon, Check, Sparkles } from 'lucide-react';
+import { Compass, BookOpen, Info, Menu, Palette, Sun, Moon, Check, Sparkles, Milestone } from 'lucide-react';
 import styles from './Navbar.module.css';
 
 export type ThemeMode = 'light' | 'dark';
@@ -83,6 +83,13 @@ export const Navbar: React.FC<NavbarProps> = ({
         >
           <Info size={18} />
           <span>Про проект</span>
+        </NavLink>
+        <NavLink 
+          to="/development" 
+          className={({ isActive }) => `${styles.navLink} ${isActive ? styles.activeLink : ''}`}
+        >
+          <Milestone size={18} />
+          <span>Розвиток проекту</span>
         </NavLink>
 
         {/* Theme Settings Control */}

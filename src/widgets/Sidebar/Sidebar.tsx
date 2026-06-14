@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { X, BookOpen, Sparkles, Info } from 'lucide-react';
+import { X, BookOpen, Sparkles, Info, Milestone } from 'lucide-react';
 import { getChapters } from '../../entities/topic/model/topics';
 import styles from './Sidebar.module.css';
 
@@ -56,6 +56,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               >
                 <Info size={16} className={styles.navIcon} />
                 <span>Про проект</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/development"
+                className={({ isActive }) => `${styles.topicLink} ${isActive ? styles.activeTopic : ''}`}
+                onClick={onClose}
+              >
+                <Milestone size={16} className={styles.navIcon} />
+                <span>Розвиток проекту</span>
               </NavLink>
             </li>
           </ul>

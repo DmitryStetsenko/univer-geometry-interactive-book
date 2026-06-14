@@ -6,6 +6,7 @@ import { Sidebar } from './widgets/Sidebar/Sidebar';
 import { TopicDetailPage } from './pages/TopicDetailPage/TopicDetailPage';
 import { AboutPage } from './pages/AboutPage/AboutPage';
 import { ShowcasePage } from './pages/ShowcasePage/ShowcasePage';
+import { DevelopmentPage } from './pages/DevelopmentPage/DevelopmentPage';
 
 /**
  * Root Application Component.
@@ -77,6 +78,16 @@ function App() {
               element={
                 <main className="content-area" style={{ maxWidth: '1000px' }}>
                   <AboutPage />
+                </main>
+              } 
+            />
+
+            {/* Development Page: Full-width layout */}
+            <Route 
+              path="/development" 
+              element={
+                <main className="content-area" style={{ maxWidth: '1000px' }}>
+                  <DevelopmentPage />
                 </main>
               } 
             />
