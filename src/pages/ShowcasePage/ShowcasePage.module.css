@@ -330,10 +330,11 @@
 .codeColumn {
   display: flex;
   flex-direction: column;
-  background-color: #0b0f19;
+  background-color: var(--bg-secondary);
   border-left: none;
   border-top: 1px solid var(--border-color);
   height: 520px;
+  transition: background-color var(--transition-normal);
 }
 
 @media (min-width: 1024px) {
@@ -349,8 +350,13 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1.25rem;
-  background-color: rgba(255, 255, 255, 0.03);
-  border-bottom: 1px solid #1e2937;
+  background-color: rgba(0, 0, 0, 0.015);
+  border-bottom: 1px solid var(--border-color);
+  transition: border-color var(--transition-normal);
+}
+
+:root[data-theme="dark"] .codeHeader {
+  background-color: rgba(255, 255, 255, 0.015);
 }
 
 .codeLang {
@@ -358,7 +364,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 .copyBtn {
@@ -366,8 +372,8 @@
   align-items: center;
   gap: 0.35rem;
   background: none;
-  border: 1px solid #334155;
-  color: #94a3b8;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
   padding: 0.35rem 0.65rem;
   border-radius: var(--radius-sm);
   font-family: var(--font-body);
@@ -378,9 +384,9 @@
 }
 
 .copyBtn:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
-  border-color: #475569;
+  background-color: var(--bg-tertiary);
+  color: var(--primary);
+  border-color: var(--primary);
 }
 
 .copySuccess {
@@ -391,18 +397,28 @@
   flex: 1;
   overflow: auto;
   padding: 1.25rem;
+  background-color: var(--bg-tertiary);
+  transition: background-color var(--transition-normal);
 }
 
 .codeBody pre {
   margin: 0;
+  background-color: var(--bg-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  padding: 1rem !important;
+  border-radius: var(--radius-sm) !important;
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
 }
 
 .codeBody code {
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  color: #e2e8f0;
+  color: var(--text-primary) !important;
   line-height: 1.5;
   white-space: pre;
+  background-color: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
 }
 
 @media (max-width: 640px) {
