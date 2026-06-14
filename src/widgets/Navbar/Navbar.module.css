@@ -100,21 +100,17 @@
   color: var(--primary);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .navbar {
     padding: 0 1rem;
   }
   
   .logoText {
-    font-size: 1.1rem;
-  }
-  
-  .navLink span {
-    display: none;
+    font-size: 1.15rem;
   }
   
   .navLink {
-    padding: 0.5rem;
+    display: none;
   }
 
   .menuButton span {
@@ -123,6 +119,20 @@
 
   .menuButton {
     padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logoText {
+    font-size: 1.05rem;
+  }
+
+  .leftSection {
+    gap: 0.5rem;
+  }
+
+  .logoContainer {
+    gap: 0.4rem;
   }
 }
 
@@ -283,7 +293,7 @@
 }
 
 /* Make settings label responsive */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .settingsLabel {
     display: none;
   }

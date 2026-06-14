@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { X } from 'lucide-react';
+import { X, BookOpen, Sparkles, Info } from 'lucide-react';
 import { getChapters } from '../../entities/topic/model/topics';
 import styles from './Sidebar.module.css';
 
@@ -19,12 +19,50 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   return (
     <aside className={`${styles.sidebar} ${isOpen ? styles.isOpen : ''}`}>
       <div className={styles.titleSection}>
-        <h3>Зміст підручника</h3>
+        <h3>Навігація</h3>
         <button className={styles.closeButton} onClick={onClose} aria-label="Сховати зміст">
           <X size={18} />
         </button>
       </div>
       <div className={styles.chaptersList}>
+        {/* Global Navigation Group */}
+        <div className={`${styles.chapterGroup} ${styles.navGroup}`}>
+          <ul className={styles.topicsList}>
+            <li>
+              <NavLink
+                to="/topic/pythagorean-theorem"
+                className={({ isActive }) => `${styles.topicLink} ${isActive ? styles.activeTopic : ''}`}
+                onClick={onClose}
+              >
+                <BookOpen size={16} className={styles.navIcon} />
+                <span>Підручник</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/showcase"
+                className={({ isActive }) => `${styles.topicLink} ${isActive ? styles.activeTopic : ''}`}
+                onClick={onClose}
+              >
+                <Sparkles size={16} className={styles.navIcon} />
+                <span>Демонстрація</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/about"
+                className={({ isActive }) => `${styles.topicLink} ${isActive ? styles.activeTopic : ''}`}
+                onClick={onClose}
+              >
+                <Info size={16} className={styles.navIcon} />
+                <span>Про проект</span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+
+        <div className={styles.divider}></div>
+
         {chapters.map((chapter, index) => (
           <div key={index} className={styles.chapterGroup}>
             <div className={styles.chapterTitle}>{chapter.title}</div>

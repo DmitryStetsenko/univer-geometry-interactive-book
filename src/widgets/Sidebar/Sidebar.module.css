@@ -123,6 +123,29 @@
   transform: scale(1.3);
 }
 
+.navGroup {
+  margin-bottom: 0;
+}
+
+.navIcon {
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.topicLink:hover .navIcon {
+  color: var(--primary);
+}
+
+.activeTopic .navIcon {
+  color: var(--primary);
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 0.25rem 0.5rem;
+}
+
 @media (max-width: 500px) {
   .sidebar {
     width: 280px;
