@@ -32,32 +32,32 @@ void markAngle(pair vertex, pair p1, pair p2, real radius, pen drawPen, pen fill
 
 // Draw the interior angles
 // Angle A (alpha) - red
-markAngle(A, B, C, 0.6, rgb(220, 50, 50)+1.5bp, rgb(255, 230, 230), "$\alpha$");
+markAngle(A, B, C, 0.6, rgb(220, 50, 50)+1.8bp, rgb(255, 230, 230), "$\alpha$");
 
 // Angle B (beta) - green
-markAngle(B, C, A, 0.6, rgb(50, 180, 50)+1.5bp, rgb(230, 255, 230), "$\beta$");
+markAngle(B, C, A, 0.6, rgb(50, 180, 50)+1.8bp, rgb(230, 255, 230), "$\beta$");
 
 // Angle C (gamma) - blue
-markAngle(C, A, B, 0.6, rgb(50, 100, 220)+1.5bp, rgb(230, 240, 255), "$\gamma$");
+markAngle(C, A, B, 0.6, rgb(50, 100, 220)+1.8bp, rgb(230, 240, 255), "$\gamma$");
 
-// Draw parallel line through C parallel to AB
+// Draw parallel line through C parallel to AB (Thicker and dark charcoal dashed line)
 pair X = (0.2, 5);
 pair Y = (8.8, 5);
-draw(X--Y, rgb(100, 100, 100)+1bp+dashed);
-label("$L \parallel AB$", Y, E, rgb(100, 100, 100));
+draw(X--Y, rgb(30, 30, 30)+1.8bp+dashed);
+label("$\mathbf{L \parallel AB}$", Y, E, rgb(30, 30, 30));
 
 // Draw alternate interior angles at C
 // Alternate to A: angle between CX (direction (-1, 0)) and CA (direction A - C) - red
-markAngle(C, C + (-1, 0), A, 0.7, rgb(220, 50, 50)+1.5bp, rgb(255, 230, 230), "$\alpha$");
+markAngle(C, C + (-1, 0), A, 0.7, rgb(220, 50, 50)+1.8bp, rgb(255, 230, 230), "$\alpha$");
 
 // Alternate to B: angle between CB (direction B - C) and CY (direction (1, 0)) - green
-markAngle(C, B, C + (1, 0), 0.7, rgb(50, 180, 50)+1.5bp, rgb(230, 255, 230), "$\beta$");
+markAngle(C, B, C + (1, 0), 0.7, rgb(50, 180, 50)+1.8bp, rgb(230, 255, 230), "$\beta$");
 
 // Fill inside the triangle with a very light background
 fill(A--B--C--cycle, rgb(245, 245, 245)+opacity(0.4));
 
 // Draw the main triangle sides
-draw(A--B--C--cycle, black+2bp);
+draw(A--B--C--cycle, black+2.2bp);
 
 // Labels for vertices
 label("$\mathbf{A}$", A, SW);
