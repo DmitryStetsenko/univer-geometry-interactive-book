@@ -94,7 +94,11 @@ export const AboutPage: React.FC = () => {
           <li>
             <strong>Додавання метаданих та теорії в конфіг:</strong>
             <br />
-            Відкрийте файл <code>src/entities/topic/model/topics.ts</code> і додайте новий об'єкт теми у масив <code>topics</code>:
+            Відкрийте файл <code>src/entities/topic/model/topics.ts</code>. Спочатку імпортуйте вихідний код Asymptote як сирий рядок за допомогою суфіксу <code>?raw</code>:
+            <pre className={styles.codeBlock}>
+{`import myTopicStep1Code from '../../../shared/assets/asymptote/my_topic_step1.asy?raw';`}
+            </pre>
+            Потім додайте новий об'єкт теми у масив <code>topics</code>:
             <pre className={styles.codeBlock}>
 {`{
   id: 'my-new-topic',
@@ -109,8 +113,8 @@ export const AboutPage: React.FC = () => {
     {
       title: 'Крок 1. Назва кроку',
       description: 'Опис першої ілюстрації.',
-      svgPath: new URL('../../../../shared/assets/asymptote/my_topic_step1.svg', import.meta.url).href,
-      asyCode: 'Код Asymptote для довідки'
+      svgPath: new URL('../../../shared/assets/asymptote/my_topic_step1.svg', import.meta.url).href,
+      asyCode: myTopicStep1Code
     }
   ]
 }`}
