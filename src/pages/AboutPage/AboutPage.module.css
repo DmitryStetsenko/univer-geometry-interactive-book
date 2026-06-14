@@ -1,0 +1,150 @@
+.aboutContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: 4rem;
+}
+
+.heroSection {
+  background: linear-gradient(135deg, var(--primary-light) 0%, rgba(236, 72, 153, 0.05) 100%);
+  padding: 3rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroSection h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heroSection p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.cardHeader h2 {
+  font-size: 1.3rem;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.sectionTitle {
+  font-size: 1.8rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--primary-light);
+  padding-bottom: 0.5rem;
+}
+
+.docContent {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 2.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.docContent h3 {
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.docContent p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.docContent ol, .docContent ul {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.docContent li {
+  margin-bottom: 0.5rem;
+}
+
+/* Alert block styles */
+.alert {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--primary);
+  background-color: var(--primary-light);
+  color: var(--text-secondary);
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.alertTitle {
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+
+/* Code layout */
+.codeBlock {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  margin: 1rem 0;
+  color: var(--text-primary);
+}
+
+@media (max-width: 640px) {
+  .heroSection {
+    padding: 2rem 1rem;
+  }
+  
+  .heroSection h1 {
+    font-size: 2rem;
+  }
+  
+  .docContent {
+    padding: 1.5rem;
+  }
+}
