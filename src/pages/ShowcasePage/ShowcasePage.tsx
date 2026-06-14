@@ -10,8 +10,7 @@ import {
   Cpu,
   Contrast,
   Workflow,
-  Box,
-  X
+  Box
 } from 'lucide-react';
 import styles from './ShowcasePage.module.css';
 
@@ -813,16 +812,10 @@ const ShowcaseCard: React.FC<ShowcaseItemProps> = ({
           <div className={styles.codeColumn}>
             <div className={styles.codeHeader}>
               <span className={styles.codeLang}>{webglDemo ? 'WebGL Shader & JS Code' : 'Asymptote Source Code'}</span>
-              <div className={styles.codeActions}>
-                <button className={styles.copyBtn} onClick={handleCopy}>
-                  {copied ? <Check size={14} className={styles.copySuccess} /> : <Copy size={14} />}
-                  <span>{copied ? 'Скопійовано!' : 'Копіювати'}</span>
-                </button>
-                <button className={styles.closeCodeBtn} onClick={() => setShowCode(false)} title="Сховати код">
-                  <X size={14} />
-                  <span>Сховати</span>
-                </button>
-              </div>
+              <button className={styles.copyBtn} onClick={handleCopy}>
+                {copied ? <Check size={14} className={styles.copySuccess} /> : <Copy size={14} />}
+                <span>{copied ? 'Скопійовано!' : 'Копіювати'}</span>
+              </button>
             </div>
             <div className={styles.codeBody}>
               <pre><code>{asyCode}</code></pre>
