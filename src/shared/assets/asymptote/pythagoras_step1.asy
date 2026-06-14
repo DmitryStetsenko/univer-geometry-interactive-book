@@ -29,7 +29,7 @@ filldraw(A--B--C--cycle, rgb(245, 245, 245), black+2bp);
 draw((0,0.3)--(0.3,0.3)--(0.3,0), black+1bp);
 
 // Labels
-label("$a = 3$", (A+C)/2, W);
+label("$a = 3$", (A+C)/2, E);
 label("$b = 4$", (A+B)/2, N);
 label("$c = 5$", (B+C)/2, align=NE);
 
