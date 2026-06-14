@@ -88,13 +88,26 @@ const fsSource = \`
  * Features auto-rotation and interactive mouse/touch drag controls.
  * Bypasses React state updates inside the animation loop for 60fps performance.
  */
-const WebGLCrystalDemo: React.FC = () => {
+interface WebGLCrystalDemoProps {
+  zoom?: number;
+  pan?: { x: number; y: number };
+}
+
+const WebGLCrystalDemo: React.FC<WebGLCrystalDemoProps> = ({ zoom = 1, pan = { x: 0, y: 0 } }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rotationRef = useRef({ x: 0.6, y: 0.5 });
   const isDraggingRef = useRef(false);
   const dragStartRef = useRef({ x: 0, y: 0 });
   const rotationStartRef = useRef({ x: 0.6, y: 0.5 });
   const animationRef = useRef<number | null>(null);
+
+  const zoomRef = useRef(zoom);
+  const panRef = useRef(pan);
+
+  useEffect(() => {
+    zoomRef.current = zoom;
+    panRef.current = pan;
+  }, [zoom, pan]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -105,12 +118,14 @@ const WebGLCrystalDemo: React.FC = () => {
       return;
     }
 
-    // Vertex Shader
+    // Vertex Shader (Supports zoom and pan directly in 3D projection space)
     const vsSource = `
       attribute vec3 position;
       attribute vec3 color;
       uniform vec2 uRotation;
       uniform float uAspect;
+      uniform float uZoom;
+      uniform vec2 uPan;
       varying vec3 vColor;
       void main() {
         vColor = color;
@@ -128,12 +143,12 @@ const WebGLCrystalDemo: React.FC = () => {
           p1.y * cx - p1.z * sx,
           p1.y * sx + p1.z * cx
         );
-        float fov = 1.3;
+        float fov = 1.3 * uZoom;
         float zDist = 3.5;
         float depth = p2.z + zDist;
         gl_Position = vec4(
-          p2.x * fov,
-          p2.y * fov * uAspect,
+          p2.x * fov + uPan.x * depth,
+          p2.y * fov * uAspect + uPan.y * depth,
           p2.z * 0.1,
           depth
         );
@@ -431,6 +446,8 @@ const WebGLCrystalDemo: React.FC = () => {
     const uRotationLoc = gl.getUniformLocation(program, 'uRotation');
     const uAspectLoc = gl.getUniformLocation(program, 'uAspect');
     const uColorOverrideLoc = gl.getUniformLocation(program, 'uColorOverride');
+    const uZoomLoc = gl.getUniformLocation(program, 'uZoom');
+    const uPanLoc = gl.getUniformLocation(program, 'uPan');
 
     gl.enable(gl.DEPTH_TEST);
     gl.enable(gl.BLEND);
@@ -446,8 +463,13 @@ const WebGLCrystalDemo: React.FC = () => {
       }
       lastTime = time;
 
-      const width = canvas.clientWidth;
-      const height = canvas.clientHeight;
+      // Device Pixel Ratio (Retina) support for pin-sharp 3D graphics
+      const dpr = window.devicePixelRatio || 1;
+      const clientWidth = canvas.clientWidth;
+      const clientHeight = canvas.clientHeight;
+      const width = Math.round(clientWidth * dpr);
+      const height = Math.round(clientHeight * dpr);
+      
       if (canvas.width !== width || canvas.height !== height) {
         canvas.width = width;
         canvas.height = height;
@@ -458,7 +480,13 @@ const WebGLCrystalDemo: React.FC = () => {
       gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
       gl.uniform2f(uRotationLoc, rotationRef.current.x, rotationRef.current.y);
-      gl.uniform1f(uAspectLoc, width / height);
+      gl.uniform1f(uAspectLoc, clientWidth / clientHeight);
+      gl.uniform1f(uZoomLoc, zoomRef.current);
+      
+      // Calculate normalized pan coordinates based on CSS dimensions
+      const normPanX = (panRef.current.x / clientWidth) * 2;
+      const normPanY = -(panRef.current.y / clientHeight) * 2;
+      gl.uniform2f(uPanLoc, normPanX, normPanY);
 
       // Check current page theme for grid contrast
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -702,13 +730,10 @@ const ShowcaseCard: React.FC<ShowcaseItemProps> = ({
                 style={{
                   width: '100%',
                   height: '100%',
-                  transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
-                  transition: isDragging ? 'none' : 'transform 0.15s ease-out',
-                  transformOrigin: 'center center',
                   pointerEvents: zoom > 1 ? 'none' : 'auto'
                 }}
               >
-                {webglDemo}
+                {React.cloneElement(webglDemo as React.ReactElement<WebGLCrystalDemoProps>, { zoom, pan })}
               </div>
             ) : (
               <img 
