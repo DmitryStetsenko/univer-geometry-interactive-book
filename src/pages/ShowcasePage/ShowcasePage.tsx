@@ -9,17 +9,20 @@ import {
   Sparkles, 
   Cpu,
   Contrast,
-  Grid
+  Grid,
+  Workflow
 } from 'lucide-react';
 import styles from './ShowcasePage.module.css';
 
 // Resolve SVG URLs
 const kochUrl = new URL('../../shared/assets/asymptote/koch_snowflake.svg', import.meta.url).href;
 const spiroUrl = new URL('../../shared/assets/asymptote/spirograph.svg', import.meta.url).href;
+const lorenzUrl = new URL('../../shared/assets/asymptote/lorenz_attractor.svg', import.meta.url).href;
 
 // Import raw code strings
 import kochCode from '../../shared/assets/asymptote/koch_snowflake.asy?raw';
 import spiroCode from '../../shared/assets/asymptote/spirograph.asy?raw';
+import lorenzCode from '../../shared/assets/asymptote/lorenz_attractor.asy?raw';
 
 interface ShowcaseItemProps {
   title: string;
@@ -254,6 +257,16 @@ export const ShowcasePage: React.FC = () => {
           svgPath={spiroUrl}
           asyCode={spiroCode}
           icon={<Sparkles className={styles.headerIcon} size={24} />}
+        />
+
+        <ShowcaseCard 
+          title="Атрактор Лоренца"
+          subtitle="Хаотична тривимірна траєкторія"
+          description="Знаменита нелінійна динамічна система з детермінованим хаосом (так званий «ефект метелика»). Траєкторія руху точки в тривимірному просторі ніколи не повторює себе, утворюючи красиву нескінченно складну двокрилу фрактальну структуру."
+          mathNotes="Програма моделює систему трьох диференціальних рівнянь Лоренца шляхом чисельного інтегрування (4000 кроків циклу). Координати 3D обертаються навколо вертикальної осі на 45 градусів і проектуються на двовимірну площину, а колір лінії плавно перетікає від індиго до рожевого залежно від кроку інтегрування."
+          svgPath={lorenzUrl}
+          asyCode={lorenzCode}
+          icon={<Workflow className={styles.headerIcon} size={24} />}
         />
       </div>
     </div>
