@@ -20,8 +20,8 @@ pair B = pointOnCircle(O, R, -30);
 pair C = pointOnCircle(O, R, 90);
 pair A = pointOnCircle(O, R, 210);
 
-// Draw the circle
-draw(circle(O, R), black+1.5bp);
+// Draw the circle (Thicker and darker)
+draw(circle(O, R), black+2.2bp);
 
 // Custom angle marking helper
 void markAngle(pair vertex, pair p1, pair p2, real radius, pen drawPen, pen fillPen, string labelText="") {
@@ -38,25 +38,25 @@ void markAngle(pair vertex, pair p1, pair p2, real radius, pen drawPen, pen fill
   draw(arcPath, drawPen);
   if (labelText != "") {
     real midAngle = (a1 + a2) / 2 * pi / 180;
-    pair labelPos = vertex + (radius + 0.35) * (cos(midAngle), sin(midAngle));
+    pair labelPos = vertex + (radius + 0.45) * (cos(midAngle), sin(midAngle));
     label(labelText, labelPos);
   }
 }
 
-// Central angle BOC (yellow/orange)
-markAngle(O, B, C, 0.7, rgb(230, 140, 10)+1.5bp, rgb(255, 240, 210), "$2\theta$");
-draw(B--O--C, rgb(230, 140, 10)+1.5bp);
+// Central angle BOC (vibrant orange/red, thicker lines)
+markAngle(O, B, C, 0.8, rgb(240, 100, 0)+2.2bp, rgb(255, 235, 220), "$\mathbf{2\theta}$");
+draw(B--O--C, rgb(240, 100, 0)+2.2bp);
 
-// Inscribed angle BAC (purple)
-markAngle(A, B, C, 0.7, rgb(130, 50, 200)+1.5bp, rgb(240, 230, 255), "$\theta$");
-draw(B--A--C, rgb(130, 50, 200)+1.5bp);
+// Inscribed angle BAC (vibrant purple, thicker lines)
+markAngle(A, B, C, 0.8, rgb(130, 20, 210)+2.2bp, rgb(245, 225, 255), "$\mathbf{\theta}$");
+draw(B--A--C, rgb(130, 20, 210)+2.2bp);
 
-// Labels and points
+// Labels and points (larger, bold labels)
 dot("$\mathbf{O}$", O, SW, black);
 dot("$\mathbf{A}$", A, A - O, black);
 dot("$\mathbf{B}$", B, B - O, black);
 dot("$\mathbf{C}$", C, C - O, black);
 
-// Highlight the intercepted arc BC
-draw(arc(O, R, -30, 90), rgb(220, 50, 50)+2.5bp);
-label("arc $BC$", pointOnCircle(O, R + 0.35, 30), rgb(220, 50, 50));
+// Highlight the intercepted arc BC (Thicker and brighter red)
+draw(arc(O, R, -30, 90), rgb(230, 30, 30)+3.2bp);
+label("$\mathbf{arc\ BC}$", pointOnCircle(O, R + 0.45, 30), rgb(230, 30, 30));

@@ -20,30 +20,30 @@ pair B = (1, 4); // 180 degrees
 pair C = (7, 4); // 0 degrees
 pair A = pointOnCircle(O, R, 60);
 
-// Draw the circle
-draw(circle(O, R), black+1.5bp);
+// Draw the circle (Thicker and darker)
+draw(circle(O, R), black+2.2bp);
 
-// Draw diameter BC
-draw(B--C, rgb(100, 100, 100)+1.2bp+dashed);
+// Draw diameter BC (High-contrast solid teal line)
+draw(B--C, rgb(0, 150, 136)+2.2bp);
 
-// Draw inscribed angle BAC
-draw(B--A--C, rgb(130, 50, 200)+1.5bp);
+// Draw inscribed angle BAC (Thicker purple lines)
+draw(B--A--C, rgb(130, 20, 210)+2.2bp);
 
-// Draw right angle mark at A
-real size = 0.25;
+// Draw right angle mark at A (Larger and clearer)
+real size = 0.35;
 pair dir1 = unit(B - A);
 pair dir2 = unit(C - A);
 pair pt1 = A + size * dir1;
 pair pt2 = A + size * dir2;
 pair pt3 = A + size * dir1 + size * dir2;
-fill(A--pt1--pt3--pt2--cycle, rgb(240, 230, 255));
-draw(pt1--pt3--pt2, rgb(130, 50, 200)+1.5bp);
+fill(A--pt1--pt3--pt2--cycle, rgb(245, 225, 255));
+draw(pt1--pt3--pt2, rgb(130, 20, 210)+2bp);
 
-// Labels and points
+// Labels and points (Bold)
 dot("$\mathbf{O}$", O, S, black);
 dot("$\mathbf{A}$", A, A - O, black);
 dot("$\mathbf{B}$", B, W, black);
 dot("$\mathbf{C}$", C, E, black);
 
-label("$\mathbf{90^\circ}$", A - (0.1, 0.45), rgb(130, 50, 200));
-label("$d = 2R$", O + (0, 0.35), rgb(100, 100, 100));
+label("$\mathbf{90^\circ}$", A - (0.1, 0.55), rgb(130, 20, 210));
+label("$\mathbf{d = 2R}$", O + (0, 0.4), rgb(0, 150, 136));

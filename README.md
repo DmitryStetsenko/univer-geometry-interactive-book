@@ -1,73 +1,88 @@
-# React + TypeScript + Vite
+# 📚 Інтерактивний підручник з геометрії (Interactive Geometry Book)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Веб-додаток, створений для наочного вивчення геометричних теорем та властивостей за допомогою інтерактивної векторної графіки **Asymptote** та технологій **WebGL/React**.
 
-Currently, two official plugins are available:
+🔗 **Демонстрація (GitHub Pages):** [univer-geometry-interactive-book](https://dmitrystetsenko.github.io/univer-geometry-interactive-book/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🌟 Основні можливості (Key Features)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **Покроковий підручник (Step-by-step Textbook)**:
+   - **Теорема Піфагора**: Інтерактивне доведення методом перегрупування площ з покроковими схемами.
+   - **Сума кутів трикутника**: Візуальний доказ теореми за допомогою побудови паралельної прямої та аналізу внутрішніх різносторонніх кутів.
+   - **Вписані кути та кола**: Дослідження зв'язку між вписаним кутом ($\theta$) та центральним кутом ($2\theta$), а також окремий випадок вписаного кута, що спирається на діаметр ($90^\circ$).
 
-## Expanding the ESLint configuration
+2. **Демонстрація Asymptote (Showcase)**:
+   - **2D алгоритми**: Математичний рекурсивний фрактал «Сніжинка Коха» та параметричний спірограф.
+   - **3D / WebGL рендеринг**: Хаотичний атрактор Лоренца, обчислений за допомогою диференціальних рівнянь третього порядку та збудований на високопродуктивній шейдерній системі WebGL.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+3. **Сучасний адаптивний інтерфейс**:
+   - Інтегроване масштабування (Zooming) та панорамування (Panning) зображень за допомогою миші або жестів на мобільних пристроях.
+   - Підтримка високощільного відображення (Retina / High-DPI) для ідеальної чіткості шейдерної графіки на будь-якому масштабі без втрати якості.
+   - Зручний мобільний інтерфейс: швидкий вибір фону та інструменти масштабування винесені в окремі тач-френдлі блоки, а довгі тексти вихідного коду мають локальний горизонтальний скрол.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠️ Технологічний стек (Tech Stack)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Frontend**: React 19, TypeScript, Vite, React Router, Lucide Icons.
+- **Математична графіка**: Asymptote (мова програмування векторної графіки з інтеграцією LaTeX для рендерингу формул).
+- **3D рендеринг**: WebGL (GLSL вертексні та фрагментні шейдери для рендерингу складних траєкторій).
+- **Деплой**: GitHub Pages (через пакет `gh-pages`).
+
+---
+
+## 📈 Структура папок (Folder Structure)
+
+- `src/shared/assets/asymptote/` — Вихідні коди креслень `.asy` та скомпільовані векторні `.svg` зображення разом із [README.md](./src/shared/assets/asymptote/README.md) документацією.
+- `src/pages/TopicDetailPage/` — Сторінки покрокових уроків підручника.
+- `src/pages/ShowcasePage/` — Сторінка демонстрації складних 2D/3D математичних моделей.
+- `src/entities/topic/model/topics.ts` — Централізована база даних тем, кроків та теоретичного опису.
+
+---
+
+## 🚀 Запуск та розробка (Development Setup)
+
+### 1. Клонування репозиторію:
+```bash
+git clone https://github.com/DmitryStetsenko/univer-geometry-interactive-book.git
+cd univer-geometry-interactive-book
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 2. Встановлення залежностей:
+```bash
+npm install
 ```
+
+### 3. Локальний запуск:
+```bash
+npm run dev
+```
+
+### 4. Збірка для продакшену (Build):
+```bash
+npm run build
+```
+
+---
+
+## 📐 Компіляція Asymptote креслень (Asymptote Compilation)
+
+Для перекомпіляції геометричних схем з папки `src/shared/assets/asymptote/` вам знадобиться встановлена система Asymptote (з підтримкою LaTeX/MiKTeX):
+
+```bash
+cd src/shared/assets/asymptote
+asy -f svg inscribed_angles_step1.asy
+```
+
+---
+
+## 🌎 Деплой на GitHub Pages (Deployment)
+
+Веб-додаток автоматично розгортається на GitHub Pages за допомогою вбудованого скрипту:
+
+```bash
+npm run deploy
+```
+Цей скрипт автоматично виконає підготовчу збірку продукту (`npm run build`) та завантажить папку `dist` на гілку `gh-pages` вашого репозиторію.
