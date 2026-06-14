@@ -360,139 +360,27 @@
   transition: background-color var(--transition-normal);
 }
 
-.bgWhite {
-  background-color: #ffffff !important;
-  background-image: none !important;
-}
-
-.bgDark {
-  background-color: #0f172a !important;
-  background-image: none !important;
-}
-
-.bgGrid {
-  background-color: #ffffff !important;
-  background-image: none !important;
-}
-
-:root[data-theme="dark"] .bgGrid {
-  background-color: #0f172a !important;
-  background-image: none !important;
-}
-
-/* Coordinate Grid Toggling & Styling */
-/* By default, hide coordinate grid paths and labels in SVG */
-.imageWrapper svg g[fill="#656667"],
-.imageWrapper svg path[stroke="#656667"],
+/* Coordinate Grid Styling */
+/* In light mode, make grid lines subtle */
 .imageWrapper svg path[stroke="#a1a1a2"] {
-  display: none !important;
-}
-
-/* Show coordinate grid elements only in Grid Mode */
-.bgGrid svg g[fill="#656667"],
-.bgGrid svg path[stroke="#656667"],
-.bgGrid svg path[stroke="#a1a1a2"] {
-  display: block !important;
-}
-
-/* In light mode grid, make grid lines subtle */
-.bgGrid svg path[stroke="#a1a1a2"] {
   stroke: #e2e8f0 !important;
 }
-.bgGrid svg path[stroke="#656667"] {
+.imageWrapper svg path[stroke="#656667"] {
   stroke: #94a3b8 !important;
 }
-.bgGrid svg g[fill="#656667"] {
+.imageWrapper svg g[fill="#656667"] {
   fill: #64748b !important;
 }
 
-/* In dark mode grid, adjust colors for perfect contrast */
-:root[data-theme="dark"] .bgGrid svg path[stroke="#a1a1a2"] {
+/* In dark mode, adjust colors for perfect contrast */
+:root[data-theme="dark"] .imageWrapper svg path[stroke="#a1a1a2"] {
   stroke: rgba(255, 255, 255, 0.08) !important;
 }
-:root[data-theme="dark"] .bgGrid svg path[stroke="#656667"] {
+:root[data-theme="dark"] .imageWrapper svg path[stroke="#656667"] {
   stroke: rgba(255, 255, 255, 0.35) !important;
 }
-:root[data-theme="dark"] .bgGrid svg g[fill="#656667"] {
+:root[data-theme="dark"] .imageWrapper svg g[fill="#656667"] {
   fill: rgba(255, 255, 255, 0.55) !important;
-}
-
-/* Floating background control panel in image wrapper */
-.bgControls {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  padding: 0.25rem;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-md);
-  z-index: 10;
-  transition: all var(--transition-normal);
-}
-
-/* In fullscreen wrapper we adjust floating controllers layout slightly */
-.fullscreenWrapper .bgControls {
-  top: 2rem;
-  right: 2rem;
-  background-color: rgba(30, 30, 30, 0.85);
-  border-color: #444;
-}
-
-.bgControls button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  width: 26px;
-  height: 26px;
-  border-radius: calc(var(--radius-sm) - 2px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition-fast);
-  color: var(--text-secondary);
-}
-
-.bgControls button:hover {
-  background-color: var(--bg-tertiary);
-  color: var(--primary);
-}
-
-.fullscreenWrapper .bgControls button {
-  color: #ccc;
-}
-
-.fullscreenWrapper .bgControls button:hover {
-  background-color: #555;
-  color: #fff;
-}
-
-.activeBgBtn {
-  background-color: var(--primary-light) !important;
-  color: var(--primary) !important;
-}
-
-.fullscreenWrapper .activeBgBtn {
-  background-color: var(--primary) !important;
-  color: #fff !important;
-}
-
-.circlePreview {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 1px solid var(--border-color);
-}
-
-.circleWhite {
-  background-color: #ffffff;
-}
-
-.circleDark {
-  background-color: #0f172a;
 }
 
 /* Ensure code block is horizontally scrollable */
@@ -628,55 +516,4 @@
 
 
 
-/* Mobile background configuration controls (rendered under the title) */
-.mobileBgControls {
-  display: none;
-}
 
-@media (max-width: 768px) {
-  .mobileBgControls {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding: 0.4rem;
-    background-color: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    margin: 0.5rem 0 1rem 0;
-    width: fit-content;
-  }
-
-  /* Hide the old floating controls inside the image wrapper on mobile */
-  .bgControls {
-    display: none !important;
-  }
-}
-
-.bgLabel {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-right: 0.25rem;
-  margin-left: 0.25rem;
-}
-
-.mobileBgBtn {
-  background: none;
-  border: 1px solid transparent;
-  cursor: pointer;
-  padding: 0.35rem 0.6rem;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  transition: all var(--transition-fast);
-}
-
-.mobileBgBtn:hover {
-  background-color: var(--bg-tertiary);
-  color: var(--primary);
-}

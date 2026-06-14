@@ -14,9 +14,7 @@ import {
   ZoomOut,
   Maximize2,
   Minimize2,
-  RotateCcw,
-  Grid,
-  Contrast
+  RotateCcw
 } from 'lucide-react';
 import { topics } from '../../entities/topic/model/topics';
 import styles from './TopicDetailPage.module.css';
@@ -44,15 +42,6 @@ export const TopicDetailPage: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [isFullscreen, setIsFullscreen] = useState(false);
-
-  // Image background configuration
-  const [imageBg, setImageBg] = useState<'theme' | 'white' | 'dark' | 'grid'>(() => {
-    return (localStorage.getItem('drawing-bg') as 'theme' | 'white' | 'dark' | 'grid') || 'theme';
-  });
-
-  useEffect(() => {
-    localStorage.setItem('drawing-bg', imageBg);
-  }, [imageBg]);
 
   // Reset steps, zoom & pan when transitioning to a different topic
   useEffect(() => {
@@ -162,54 +151,11 @@ export const TopicDetailPage: React.FC = () => {
         <section className={styles.visualSection}>
           <h2 style={{ fontSize: '1.4rem' }}>Візуальне доведення</h2>
 
-          {hasSteps && currentStep && (
-            <div className={styles.mobileBgControls}>
-              <span className={styles.bgLabel}>Фон:</span>
-              <button 
-                className={`${styles.mobileBgBtn} ${imageBg === 'theme' ? styles.activeBgBtn : ''}`} 
-                onClick={() => setImageBg('theme')}
-                title="Колір теми"
-              >
-                <Contrast size={14} />
-                <span>Тема</span>
-              </button>
-              <button 
-                className={`${styles.mobileBgBtn} ${imageBg === 'white' ? styles.activeBgBtn : ''}`} 
-                onClick={() => setImageBg('white')}
-                title="Білий"
-              >
-                <div className={`${styles.circlePreview} ${styles.circleWhite}`} />
-                <span>Білий</span>
-              </button>
-              <button 
-                className={`${styles.mobileBgBtn} ${imageBg === 'dark' ? styles.activeBgBtn : ''}`} 
-                onClick={() => setImageBg('dark')}
-                title="Темний"
-              >
-                <div className={`${styles.circlePreview} ${styles.circleDark}`} />
-                <span>Темний</span>
-              </button>
-              <button 
-                className={`${styles.mobileBgBtn} ${imageBg === 'grid' ? styles.activeBgBtn : ''}`} 
-                onClick={() => setImageBg('grid')}
-                title="Сітка"
-              >
-                <Grid size={14} />
-                <span>Сітка</span>
-              </button>
-            </div>
-          )}
-          
           {hasSteps && currentStep ? (
             <>
               {/* Graphic SVG Viewer */}
               <div 
-                className={`${styles.imageWrapper} ${
-                  imageBg === 'white' ? styles.bgWhite : 
-                  imageBg === 'dark' ? styles.bgDark : 
-                  imageBg === 'grid' ? styles.bgGrid : 
-                  styles.bgTheme
-                } ${isFullscreen ? styles.fullscreenWrapper : ''}`}
+                className={`${styles.imageWrapper} ${styles.bgTheme} ${isFullscreen ? styles.fullscreenWrapper : ''}`}
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
@@ -231,41 +177,6 @@ export const TopicDetailPage: React.FC = () => {
                   }}
                   draggable={false}
                 />
-
-                {/* Floating background configuration controls */}
-                <div 
-                  className={styles.bgControls} 
-                  onMouseDown={(e) => e.stopPropagation()}
-                >
-                  <button 
-                    className={imageBg === 'theme' ? styles.activeBgBtn : ''} 
-                    onClick={() => setImageBg('theme')}
-                    title="Колір теми"
-                  >
-                    <Contrast size={14} />
-                  </button>
-                  <button 
-                    className={imageBg === 'white' ? styles.activeBgBtn : ''} 
-                    onClick={() => setImageBg('white')}
-                    title="Білий"
-                  >
-                    <div className={`${styles.circlePreview} ${styles.circleWhite}`} />
-                  </button>
-                  <button 
-                    className={imageBg === 'dark' ? styles.activeBgBtn : ''} 
-                    onClick={() => setImageBg('dark')}
-                    title="Темний"
-                  >
-                    <div className={`${styles.circlePreview} ${styles.circleDark}`} />
-                  </button>
-                  <button 
-                    className={imageBg === 'grid' ? styles.activeBgBtn : ''} 
-                    onClick={() => setImageBg('grid')}
-                    title="Сітка"
-                  >
-                    <Grid size={14} />
-                  </button>
-                </div>
 
                 {/* Floating controls in the corner */}
                 <div className={styles.zoomControls}>
