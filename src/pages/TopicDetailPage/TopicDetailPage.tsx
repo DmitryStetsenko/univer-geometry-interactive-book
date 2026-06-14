@@ -9,7 +9,12 @@ import {
   BookOpen, 
   Check, 
   Copy,
-  Compass
+  Compass,
+  ZoomIn,
+  ZoomOut,
+  Maximize2,
+  Minimize2,
+  RotateCcw
 } from 'lucide-react';
 import { topics } from '../../entities/topic/model/topics';
 import styles from './TopicDetailPage.module.css';
@@ -31,11 +36,65 @@ export const TopicDetailPage: React.FC = () => {
   const [showCode, setShowCode] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  // Reset steps when transitioning to a different topic
+  // Zoom & Pan states
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  // Reset steps, zoom & pan when transitioning to a different topic
   useEffect(() => {
     setCurrentStepIndex(0);
     setShowCode(false);
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+    setIsFullscreen(false);
   }, [topicId]);
+
+  // Reset zoom & pan when step changes
+  useEffect(() => {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  }, [currentStepIndex]);
+
+  const handleZoomIn = () => {
+    setZoom(prev => Math.min(prev + 0.25, 4));
+  };
+
+  const handleZoomOut = () => {
+    setZoom(prev => {
+      const next = Math.max(prev - 0.25, 1);
+      if (next === 1) {
+        setPan({ x: 0, y: 0 });
+      }
+      return next;
+    });
+  };
+
+  const handleResetZoom = () => {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (zoom === 1) return; // Only allow panning when zoomed in
+    e.preventDefault();
+    setIsDragging(true);
+    setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    setPan({
+      x: e.clientX - dragStart.x,
+      y: e.clientY - dragStart.y
+    });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
 
   // Handle case where topic is not found
   if (!topic) {
@@ -95,12 +154,46 @@ export const TopicDetailPage: React.FC = () => {
           {hasSteps && currentStep ? (
             <>
               {/* Graphic SVG Viewer */}
-              <div className={styles.imageWrapper}>
+              <div 
+                className={`${styles.imageWrapper} ${isFullscreen ? styles.fullscreenWrapper : ''}`}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+                style={{ 
+                  cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
+                  overflow: 'hidden',
+                  position: 'relative'
+                }}
+              >
                 <img 
                   src={currentStep.svgPath} 
                   alt={currentStep.title} 
                   className={styles.graphicSvg} 
+                  style={{
+                    transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+                    transition: isDragging ? 'none' : 'transform 0.15s ease-out',
+                    transformOrigin: 'center center'
+                  }}
+                  draggable={false}
                 />
+
+                {/* Floating controls in the corner */}
+                <div className={styles.zoomControls}>
+                  <button onClick={handleZoomOut} disabled={zoom <= 1} title="Зменшити">
+                    <ZoomOut size={16} />
+                  </button>
+                  <span className={styles.zoomLevel}>{Math.round(zoom * 100)}%</span>
+                  <button onClick={handleZoomIn} disabled={zoom >= 4} title="Збільшити">
+                    <ZoomIn size={16} />
+                  </button>
+                  <button onClick={handleResetZoom} disabled={zoom === 1 && pan.x === 0 && pan.y === 0} title="Скинути">
+                    <RotateCcw size={16} />
+                  </button>
+                  <button onClick={() => setIsFullscreen(!isFullscreen)} title={isFullscreen ? "Згорнути" : "На весь екран"}>
+                    {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+                  </button>
+                </div>
               </div>
 
               {/* Step info */}
