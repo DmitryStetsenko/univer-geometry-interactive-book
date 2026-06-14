@@ -650,35 +650,33 @@ const ShowcaseCard: React.FC<ShowcaseItemProps> = ({
         </button>
       </div>
 
-      {!webglDemo && (
-        <div className={styles.mobileBgControls}>
-          <span className={styles.bgLabel}>Фон:</span>
-          <button 
-            className={`${styles.mobileBgBtn} ${imageBg === 'theme' ? styles.activeBgBtn : ''}`} 
-            onClick={() => setImageBg('theme')}
-            title="Колір теми"
-          >
-            <Contrast size={14} />
-            <span>Тема</span>
-          </button>
-          <button 
-            className={`${styles.mobileBgBtn} ${imageBg === 'white' ? styles.activeBgBtn : ''}`} 
-            onClick={() => setImageBg('white')}
-            title="Білий"
-          >
-            <div className={`${styles.circlePreview} ${styles.circleWhite}`} />
-            <span>Білий</span>
-          </button>
-          <button 
-            className={`${styles.mobileBgBtn} ${imageBg === 'dark' ? styles.activeBgBtn : ''}`} 
-            onClick={() => setImageBg('dark')}
-            title="Темний"
-          >
-            <div className={`${styles.circlePreview} ${styles.circleDark}`} />
-            <span>Темний</span>
-          </button>
-        </div>
-      )}
+      <div className={styles.mobileBgControls}>
+        <span className={styles.bgLabel}>Фон:</span>
+        <button 
+          className={`${styles.mobileBgBtn} ${imageBg === 'theme' ? styles.activeBgBtn : ''}`} 
+          onClick={() => setImageBg('theme')}
+          title="Колір теми"
+        >
+          <Contrast size={14} />
+          <span>Тема</span>
+        </button>
+        <button 
+          className={`${styles.mobileBgBtn} ${imageBg === 'white' ? styles.activeBgBtn : ''}`} 
+          onClick={() => setImageBg('white')}
+          title="Білий"
+        >
+          <div className={`${styles.circlePreview} ${styles.circleWhite}`} />
+          <span>Білий</span>
+        </button>
+        <button 
+          className={`${styles.mobileBgBtn} ${imageBg === 'dark' ? styles.activeBgBtn : ''}`} 
+          onClick={() => setImageBg('dark')}
+          title="Темний"
+        >
+          <div className={`${styles.circlePreview} ${styles.circleDark}`} />
+          <span>Темний</span>
+        </button>
+      </div>
 
       <div className={`${styles.cardBody} ${showCode ? styles.withCode : ''}`}>
         {/* Graphical Section */}
@@ -689,18 +687,29 @@ const ShowcaseCard: React.FC<ShowcaseItemProps> = ({
               imageBg === 'dark' ? styles.bgDark : 
               styles.bgTheme
             }`}
-            onMouseDown={webglDemo ? undefined : handleMouseDown}
-            onMouseMove={webglDemo ? undefined : handleMouseMove}
-            onMouseUp={webglDemo ? undefined : handleMouseUp}
-            onMouseLeave={webglDemo ? undefined : handleMouseUp}
+            onMouseDown={webglDemo ? (zoom > 1 ? handleMouseDown : undefined) : handleMouseDown}
+            onMouseMove={webglDemo ? (zoom > 1 ? handleMouseMove : undefined) : handleMouseMove}
+            onMouseUp={webglDemo ? (zoom > 1 ? handleMouseUp : undefined) : handleMouseUp}
+            onMouseLeave={webglDemo ? (zoom > 1 ? handleMouseUp : undefined) : handleMouseUp}
             style={{ 
-              cursor: webglDemo ? 'default' : (zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default'),
+              cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : (webglDemo ? 'default' : 'default'),
               overflow: 'hidden',
               position: 'relative'
             }}
           >
             {webglDemo ? (
-              webglDemo
+              <div 
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+                  transition: isDragging ? 'none' : 'transform 0.15s ease-out',
+                  transformOrigin: 'center center',
+                  pointerEvents: zoom > 1 ? 'none' : 'auto'
+                }}
+              >
+                {webglDemo}
+              </div>
             ) : (
               <img 
                 src={svgPath} 
@@ -715,48 +724,46 @@ const ShowcaseCard: React.FC<ShowcaseItemProps> = ({
               />
             )}
 
-            {!webglDemo && (
-              <>
-                {/* Backing settings overlay */}
-                <div className={styles.bgControls} onMouseDown={(e) => e.stopPropagation()}>
-                  <button 
-                    className={imageBg === 'theme' ? styles.activeBgBtn : ''} 
-                    onClick={() => setImageBg('theme')}
-                    title="Колір теми"
-                  >
-                    <Contrast size={14} />
-                  </button>
-                  <button 
-                    className={imageBg === 'white' ? styles.activeBgBtn : ''} 
-                    onClick={() => setImageBg('white')}
-                    title="Білий"
-                  >
-                    <div className={`${styles.circlePreview} ${styles.circleWhite}`} />
-                  </button>
-                  <button 
-                    className={imageBg === 'dark' ? styles.activeBgBtn : ''} 
-                    onClick={() => setImageBg('dark')}
-                    title="Темний"
-                  >
-                    <div className={`${styles.circlePreview} ${styles.circleDark}`} />
-                  </button>
-                </div>
+            <>
+              {/* Backing settings overlay */}
+              <div className={styles.bgControls} onMouseDown={(e) => e.stopPropagation()}>
+                <button 
+                  className={imageBg === 'theme' ? styles.activeBgBtn : ''} 
+                  onClick={() => setImageBg('theme')}
+                  title="Колір теми"
+                >
+                  <Contrast size={14} />
+                </button>
+                <button 
+                  className={imageBg === 'white' ? styles.activeBgBtn : ''} 
+                  onClick={() => setImageBg('white')}
+                  title="Білий"
+                >
+                  <div className={`${styles.circlePreview} ${styles.circleWhite}`} />
+                </button>
+                <button 
+                  className={imageBg === 'dark' ? styles.activeBgBtn : ''} 
+                  onClick={() => setImageBg('dark')}
+                  title="Темний"
+                >
+                  <div className={`${styles.circlePreview} ${styles.circleDark}`} />
+                </button>
+              </div>
 
-                {/* Zoom overlay controls */}
-                <div className={styles.zoomControls} onMouseDown={(e) => e.stopPropagation()}>
-                  <button onClick={handleZoomOut} disabled={zoom <= 1} title="Зменшити">
-                    <ZoomOut size={14} />
-                  </button>
-                  <span className={styles.zoomLevel}>{Math.round(zoom * 100)}%</span>
-                  <button onClick={handleZoomIn} disabled={zoom >= 4} title="Збільшити">
-                    <ZoomIn size={14} />
-                  </button>
-                  <button onClick={handleResetZoom} disabled={zoom === 1 && pan.x === 0 && pan.y === 0} title="Скинути">
-                    <RotateCcw size={14} />
-                  </button>
-                </div>
-              </>
-            )}
+              {/* Zoom overlay controls */}
+              <div className={styles.zoomControls} onMouseDown={(e) => e.stopPropagation()}>
+                <button onClick={handleZoomOut} disabled={zoom <= 1} title="Зменшити">
+                  <ZoomOut size={14} />
+                </button>
+                <span className={styles.zoomLevel}>{Math.round(zoom * 100)}%</span>
+                <button onClick={handleZoomIn} disabled={zoom >= 4} title="Збільшити">
+                  <ZoomIn size={14} />
+                </button>
+                <button onClick={handleResetZoom} disabled={zoom === 1 && pan.x === 0 && pan.y === 0} title="Скинути">
+                  <RotateCcw size={14} />
+                </button>
+              </div>
+            </>
           </div>
 
           <div className={styles.detailsBox}>
