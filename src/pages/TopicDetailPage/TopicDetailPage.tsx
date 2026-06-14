@@ -143,36 +143,6 @@ export const TopicDetailPage: React.FC = () => {
       <section className={styles.headerSection}>
         <div className={styles.chapterBreadcrumb}>{topic.chapter}</div>
         <h1>{topic.title}</h1>
-
-        {hasSteps && currentStep && (
-          <div className={styles.mobileBgControls}>
-            <span className={styles.bgLabel}>Фон:</span>
-            <button 
-              className={`${styles.mobileBgBtn} ${imageBg === 'theme' ? styles.activeBgBtn : ''}`} 
-              onClick={() => setImageBg('theme')}
-              title="Колір теми"
-            >
-              <Contrast size={14} />
-              <span>Тема</span>
-            </button>
-            <button 
-              className={`${styles.mobileBgBtn} ${imageBg === 'white' ? styles.activeBgBtn : ''}`} 
-              onClick={() => setImageBg('white')}
-              title="Білий"
-            >
-              <div className={`${styles.circlePreview} ${styles.circleWhite}`} />
-              <span>Білий</span>
-            </button>
-            <button 
-              className={`${styles.mobileBgBtn} ${imageBg === 'dark' ? styles.activeBgBtn : ''}`} 
-              onClick={() => setImageBg('dark')}
-              title="Темний"
-            >
-              <div className={`${styles.circlePreview} ${styles.circleDark}`} />
-              <span>Темний</span>
-            </button>
-          </div>
-        )}
       </section>
 
       {/* Main topic layout: Theory on left, Interactive visuals on right */}
@@ -191,6 +161,72 @@ export const TopicDetailPage: React.FC = () => {
         {/* Visual proof and Asymptote code section */}
         <section className={styles.visualSection}>
           <h2 style={{ fontSize: '1.4rem' }}>Візуальне доведення</h2>
+
+          {hasSteps && currentStep && (
+            <>
+              {/* Background selector for mobile */}
+              <div className={styles.mobileBgControls}>
+                <span className={styles.bgLabel}>Фон:</span>
+                <button 
+                  className={`${styles.mobileBgBtn} ${imageBg === 'theme' ? styles.activeBgBtn : ''}`} 
+                  onClick={() => setImageBg('theme')}
+                  title="Колір теми"
+                >
+                  <Contrast size={14} />
+                  <span>Тема</span>
+                </button>
+                <button 
+                  className={`${styles.mobileBgBtn} ${imageBg === 'white' ? styles.activeBgBtn : ''}`} 
+                  onClick={() => setImageBg('white')}
+                  title="Білий"
+                >
+                  <div className={`${styles.circlePreview} ${styles.circleWhite}`} />
+                  <span>Білий</span>
+                </button>
+                <button 
+                  className={`${styles.mobileBgBtn} ${imageBg === 'dark' ? styles.activeBgBtn : ''}`} 
+                  onClick={() => setImageBg('dark')}
+                  title="Темний"
+                >
+                  <div className={`${styles.circlePreview} ${styles.circleDark}`} />
+                  <span>Темний</span>
+                </button>
+              </div>
+
+              {/* Zoom selector for mobile */}
+              <div className={styles.mobileZoomControls}>
+                <span className={styles.bgLabel}>Масштаб:</span>
+                <button 
+                  className={styles.mobileBgBtn} 
+                  onClick={handleZoomOut} 
+                  disabled={zoom <= 1} 
+                  title="Зменшити"
+                >
+                  <ZoomOut size={14} />
+                  <span>Зменшити</span>
+                </button>
+                <span className={styles.mobileZoomLevel}>{Math.round(zoom * 100)}%</span>
+                <button 
+                  className={styles.mobileBgBtn} 
+                  onClick={handleZoomIn} 
+                  disabled={zoom >= 4} 
+                  title="Збільшити"
+                >
+                  <ZoomIn size={14} />
+                  <span>Збільшити</span>
+                </button>
+                <button 
+                  className={styles.mobileBgBtn} 
+                  onClick={handleResetZoom} 
+                  disabled={zoom === 1 && pan.x === 0 && pan.y === 0} 
+                  title="Скинути"
+                >
+                  <RotateCcw size={14} />
+                  <span>Скинути</span>
+                </button>
+              </div>
+            </>
+          )}
 
           {hasSteps && currentStep ? (
             <>

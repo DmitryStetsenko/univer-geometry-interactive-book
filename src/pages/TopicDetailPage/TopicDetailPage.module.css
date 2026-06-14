@@ -472,7 +472,8 @@
 }
 
 /* Mobile background configuration controls (rendered under the title) */
-.mobileBgControls {
+.mobileBgControls,
+.mobileZoomControls {
   display: none;
 }
 
@@ -486,12 +487,34 @@
     background-color: var(--bg-secondary);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
+    margin: 0.5rem 0 0 0;
+    width: fit-content;
+  }
+
+  .mobileZoomControls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.4rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
     margin: 0.5rem 0 1rem 0;
     width: fit-content;
   }
 
+  .mobileZoomLevel {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 0 0.25rem;
+  }
+
   /* Hide the old floating controls inside the image wrapper on mobile */
-  .bgControls {
+  .bgControls,
+  .zoomControls {
     display: none !important;
   }
 }
