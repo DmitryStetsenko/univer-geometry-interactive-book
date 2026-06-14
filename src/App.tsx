@@ -5,6 +5,7 @@ import type { ThemeMode, AccentColor } from './widgets/Navbar/Navbar';
 import { Sidebar } from './widgets/Sidebar/Sidebar';
 import { TopicDetailPage } from './pages/TopicDetailPage/TopicDetailPage';
 import { AboutPage } from './pages/AboutPage/AboutPage';
+import { ShowcasePage } from './pages/ShowcasePage/ShowcasePage';
 
 /**
  * Root Application Component.
@@ -76,6 +77,16 @@ function App() {
               element={
                 <main className="content-area" style={{ maxWidth: '1000px' }}>
                   <AboutPage />
+                </main>
+              } 
+            />
+
+            {/* Showcase Page: Full-width layout */}
+            <Route 
+              path="/showcase" 
+              element={
+                <main className="content-area" style={{ maxWidth: '1200px' }}>
+                  <ShowcasePage />
                 </main>
               } 
             />

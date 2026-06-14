@@ -1,0 +1,431 @@
+.showcaseContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 1rem 0;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pageHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pageTitle {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+}
+
+.pageSubtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+.cardsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: rgba(0, 0, 0, 0.01);
+}
+
+:root[data-theme="dark"] .cardHeader {
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+.titleArea {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  border-radius: var(--radius-md);
+}
+
+.headerIcon {
+  animation: pulseIcon 3s ease-in-out infinite;
+}
+
+@keyframes pulseIcon {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.cardSubtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.codeToggleBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.codeToggleBtn:hover {
+  background-color: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.activeToggle {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: #ffffff !important;
+}
+
+.cardBody {
+  display: grid;
+  grid-template-columns: 1fr;
+  transition: all var(--transition-normal);
+}
+
+@media (min-width: 1024px) {
+  .cardBody.withCode {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+.visualColumn {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 1.25rem;
+  border-right: none;
+}
+
+@media (min-width: 1024px) {
+  .withCode .visualColumn {
+    border-right: 1px solid var(--border-color);
+  }
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  height: 420px;
+  position: relative;
+  background-color: var(--bg-primary);
+}
+
+.svgImage {
+  max-width: 90%;
+  max-height: 380px;
+  object-fit: contain;
+}
+
+/* Drawing backing settings overlay */
+.bgControls {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 0.25rem;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  z-index: 10;
+  transition: all var(--transition-normal);
+}
+
+.bgControls button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 26px;
+  height: 26px;
+  border-radius: calc(var(--radius-sm) - 2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  color: var(--text-secondary);
+}
+
+.bgControls button:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--primary);
+}
+
+.activeBgBtn {
+  background-color: var(--primary-light) !important;
+  color: var(--primary) !important;
+}
+
+.circlePreview {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+}
+
+.circleWhite {
+  background-color: #ffffff;
+}
+
+.circleDark {
+  background-color: #0f172a;
+}
+
+.bgWhite {
+  background-color: #ffffff !important;
+  background-image: none !important;
+}
+
+.bgDark {
+  background-color: #0f172a !important;
+  background-image: none !important;
+}
+
+.bgGrid {
+  background-color: #ffffff !important;
+  background-image: 
+    linear-gradient(to right, rgba(99, 102, 241, 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(99, 102, 241, 0.22) 1px, transparent 1px) !important;
+  background-size: 20px 20px !important;
+}
+
+:root[data-theme="dark"] .bgGrid {
+  background-color: #0f172a !important;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 1px, transparent 1px) !important;
+}
+
+/* Zoom overlays */
+.zoomControls {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  z-index: 10;
+}
+
+.zoomControls button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 0.2rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.zoomControls button:hover:not(:disabled) {
+  background-color: var(--bg-tertiary);
+  color: var(--primary);
+}
+
+.zoomControls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.zoomLevel {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  min-width: 40px;
+  text-align: center;
+}
+
+.detailsBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.descriptionText {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.mathNotes {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  background-color: var(--bg-primary);
+  border-left: 3px solid var(--primary);
+  padding: 0.75rem 1rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* Code column */
+.codeColumn {
+  display: flex;
+  flex-direction: column;
+  background-color: #0b0f19;
+  border-left: none;
+  border-top: 1px solid var(--border-color);
+  height: 520px;
+}
+
+@media (min-width: 1024px) {
+  .codeColumn {
+    border-left: 1px solid var(--border-color);
+    border-top: none;
+    height: auto;
+  }
+}
+
+.codeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid #1e2937;
+}
+
+.codeLang {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #94a3b8;
+}
+
+.copyBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: 1px solid #334155;
+  color: #94a3b8;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.copyBtn:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border-color: #475569;
+}
+
+.copySuccess {
+  color: #10b981;
+}
+
+.codeBody {
+  flex: 1;
+  overflow: auto;
+  padding: 1.25rem;
+}
+
+.codeBody pre {
+  margin: 0;
+}
+
+.codeBody code {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: #e2e8f0;
+  line-height: 1.5;
+  white-space: pre;
+}
+
+@media (max-width: 640px) {
+  .pageTitle {
+    font-size: 1.8rem;
+  }
+  
+  .pageSubtitle {
+    font-size: 0.95rem;
+  }
+  
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .codeToggleBtn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .imageContainer {
+    height: 320px;
+  }
+}
