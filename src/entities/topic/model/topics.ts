@@ -5,10 +5,22 @@ const pythagorasStep1Url = new URL('../../../shared/assets/asymptote/pythagoras_
 const pythagorasStep2Url = new URL('../../../shared/assets/asymptote/pythagoras_step2.svg', import.meta.url).href;
 const pythagorasStep3Url = new URL('../../../shared/assets/asymptote/pythagoras_step3.svg', import.meta.url).href;
 
+const triangleAnglesStep1Url = new URL('../../../shared/assets/asymptote/triangle_angles_step1.svg', import.meta.url).href;
+const triangleAnglesStep2Url = new URL('../../../shared/assets/asymptote/triangle_angles_step2.svg', import.meta.url).href;
+
+const inscribedAnglesStep1Url = new URL('../../../shared/assets/asymptote/inscribed_angles_step1.svg', import.meta.url).href;
+const inscribedAnglesStep2Url = new URL('../../../shared/assets/asymptote/inscribed_angles_step2.svg', import.meta.url).href;
+
 // Import Asymptote code snippets directly from source files using Vite raw loaders
 import pythagorasStep1Code from '../../../shared/assets/asymptote/pythagoras_step1.asy?raw';
 import pythagorasStep2Code from '../../../shared/assets/asymptote/pythagoras_step2.asy?raw';
 import pythagorasStep3Code from '../../../shared/assets/asymptote/pythagoras_step3.asy?raw';
+
+import triangleAnglesStep1Code from '../../../shared/assets/asymptote/triangle_angles_step1.asy?raw';
+import triangleAnglesStep2Code from '../../../shared/assets/asymptote/triangle_angles_step2.asy?raw';
+
+import inscribedAnglesStep1Code from '../../../shared/assets/asymptote/inscribed_angles_step1.asy?raw';
+import inscribedAnglesStep2Code from '../../../shared/assets/asymptote/inscribed_angles_step2.asy?raw';
 
 /**
  * Global database of topics. 
@@ -25,7 +37,7 @@ export const topics: Topic[] = [
       'Теорема Піфагора — одне з найфундаментальніших тверджень евклідової геометрії. Вона встановлює зв\'язок між сторонами прямокутного трикутника.',
       'Формулювання теореми: у прямокутному трикутнику площа квадрата, побудованого на гіпотенузі, дорівнює сумі площ квадратів, побудованих на катетах.',
       'Алгебраїчна форма запису відома кожному: a² + b² = c², де a та b — довжини катетів, а c — довжина гіпотенузи.',
-      'У цьому розділі представлено класичне візуальне доведення методом перегрупування. Ми беремо квадрат зі стороною (a + b) і розміщуємо всередині чотири однакових прямокутних трикутники двома різними способами. Оскільки загальна площа квадрата та площа чотирьох трикутників залишаються незмінними, вільна площа в обох випадках має бути рівною. Це означає, що площа великого квадрата c² дорівнює сумі площ двох менших квадратів a² та b².'
+      'У цьому розділі представлено класичне візуальне доведення методом перегрупування. Ми беремо квадрат зі стороною (a + b) і розміщуємо всередині чотири одинакових прямокутних трикутники двома різними способами. Оскільки загальна площа квадрата та площа чотирьох трикутників залишаються незмінними, вільна площа в обох випадках має бути рівною. Це означає, що площа великого квадрата c² дорівнює сумі площ двох менших квадратів a² та b².'
     ],
     steps: [
       {
@@ -42,7 +54,7 @@ export const topics: Topic[] = [
       },
       {
         title: 'Крок 3. Перегрупування (Площі a² та b²)',
-        description: 'Пересунемо чотири трикутники так, щоб вони утворили два прямокутники розміром a × b в кутах. Тепер вільна площа розділилася на два окремих квадрати: червоний квадрат площею a² = 9 та синій квадрат площею b² = 16. Оскільки сумарна вільна площа в обох випадках однакова, ми наочно бачимо, що c² = a² + b² (25 = 9 + 16). Доведення завершено!',
+        description: 'Пересунемо чотири трикутники так, щоб вони утворили два прямокутники розміром a × b в кутах. Тепер вільна площа розділилася на два окремих квадрати: червоний квадрат площею a² = 9 та синій квадрат площею b² = 16. Оскільки сумарна вільна площа в обох випадках однакова, мы наочно бачимо, що c² = a² + b² (25 = 9 + 16). Доведення завершено!',
         svgPath: pythagorasStep3Url,
         asyCode: pythagorasStep3Code
       }
@@ -57,8 +69,20 @@ export const topics: Topic[] = [
       'Сума кутів будь-якого трикутника на евклідовій площині завжди дорівнює 180° (або π радіан).',
       'Ця теорема є прямим наслідком аксіоми про паралельні прямі (п\'ятого постулату Евкліда). Якщо провести через одну з вершин трикутника пряму, паралельну протилежній стороні, то утворяться рівні внутрішні різносторонні кути, які разом з кутом при вершині складають розгорнутий кут 180°.'
     ],
-    // Graphics not implemented yet, showing that it's easy to add
-    steps: []
+    steps: [
+      {
+        title: 'Крок 1. Внутрішні кути трикутника',
+        description: 'Побудуємо довільний трикутник ABC. Позначимо його внутрішні кути як α (червоний), β (зелений) та γ (синій). Вони задають форму нашого трикутника на координатній площині.',
+        svgPath: triangleAnglesStep1Url,
+        asyCode: triangleAnglesStep1Code
+      },
+      {
+        title: 'Крок 2. Паралельна пряма та сума 180°',
+        description: 'Проведемо через вершину C пряму L, паралельну стороні AB. Оскільки L || AB, утворюються рівні внутрішні різносторонні кути: кут зліва дорівнює α, а кут справа дорівнює β. Разом з кутом γ вони утворюють розгорнутий кут на прямій L. Отже, α + β + γ = 180°.',
+        svgPath: triangleAnglesStep2Url,
+        asyCode: triangleAnglesStep2Code
+      }
+    ]
   },
   {
     id: 'inscribed-angles',
@@ -66,10 +90,23 @@ export const topics: Topic[] = [
     chapter: 'Розділ 3. Коло та круг',
     description: 'Зв\'язок між вписаним та центральним кутами, що спираються на одну дугу.',
     theory: [
-      'Вписаний кут — це кут, вершина якого лежить на колі, а сторони перетинають це коло.',
+      'Вписаний кут — це кут, вершина якого лежить на колі, а сторони перетинають це колок.',
       'Теорема про вписаний кут стверджує: вписаний кут дорівнює половині центрального кута, що спирається на ту саму дугу. Як наслідок, усі вписані кути, які спираються на одну й ту саму дугу, є рівними між собою, а вписаний кут, що спирається на діаметр, завжди дорівнює 90°.'
     ],
-    steps: []
+    steps: [
+      {
+        title: 'Крок 1. Вписаний та центральний кути',
+        description: 'Побудуємо коло з центром O та радіусом R = 3. Вписаний кут BAC (θ) та центральний кут BOC (2θ) спираються на одну й ту саму дугу BC. На кресленні наочно видно, що центральний кут рівно удвічі більший за вписаний.',
+        svgPath: inscribedAnglesStep1Url,
+        asyCode: inscribedAnglesStep1Code
+      },
+      {
+        title: 'Крок 2. Кут, що спирається на діаметр',
+        description: 'Розглянемо випадок, коли хорда BC проходить через центр O, тобто є діаметром. Тоді центральний кут є розгорнутим (180°). Відповідно, будь-який вписаний кут BAC, що спирається на діаметр, дорівнює 180° / 2 = 90° (прямий кут).',
+        svgPath: inscribedAnglesStep2Url,
+        asyCode: inscribedAnglesStep2Code
+      }
+    ]
   }
 ];
 
