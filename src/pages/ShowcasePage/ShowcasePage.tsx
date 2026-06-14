@@ -8,6 +8,7 @@ import {
   RotateCcw, 
   Sparkles, 
   Cpu,
+  Contrast,
   Workflow,
   Box
 } from 'lucide-react';
@@ -477,6 +478,7 @@ const ShowcaseCard: React.FC<ShowcaseItemProps> = ({
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [imageBg, setImageBg] = useState<'theme' | 'white' | 'dark'>('theme');
 
   const handleCopy = async () => {
     try {
@@ -542,11 +544,45 @@ const ShowcaseCard: React.FC<ShowcaseItemProps> = ({
         </button>
       </div>
 
+      {!webglDemo && (
+        <div className={styles.mobileBgControls}>
+          <span className={styles.bgLabel}>Фон:</span>
+          <button 
+            className={`${styles.mobileBgBtn} ${imageBg === 'theme' ? styles.activeBgBtn : ''}`} 
+            onClick={() => setImageBg('theme')}
+            title="Колір теми"
+          >
+            <Contrast size={14} />
+            <span>Тема</span>
+          </button>
+          <button 
+            className={`${styles.mobileBgBtn} ${imageBg === 'white' ? styles.activeBgBtn : ''}`} 
+            onClick={() => setImageBg('white')}
+            title="Білий"
+          >
+            <div className={`${styles.circlePreview} ${styles.circleWhite}`} />
+            <span>Білий</span>
+          </button>
+          <button 
+            className={`${styles.mobileBgBtn} ${imageBg === 'dark' ? styles.activeBgBtn : ''}`} 
+            onClick={() => setImageBg('dark')}
+            title="Темний"
+          >
+            <div className={`${styles.circlePreview} ${styles.circleDark}`} />
+            <span>Темний</span>
+          </button>
+        </div>
+      )}
+
       <div className={`${styles.cardBody} ${showCode ? styles.withCode : ''}`}>
         {/* Graphical Section */}
         <div className={styles.visualColumn}>
           <div 
-            className={`${styles.imageContainer} ${styles.bgTheme}`}
+            className={`${styles.imageContainer} ${
+              imageBg === 'white' ? styles.bgWhite : 
+              imageBg === 'dark' ? styles.bgDark : 
+              styles.bgTheme
+            }`}
             onMouseDown={webglDemo ? undefined : handleMouseDown}
             onMouseMove={webglDemo ? undefined : handleMouseMove}
             onMouseUp={webglDemo ? undefined : handleMouseUp}
@@ -575,6 +611,31 @@ const ShowcaseCard: React.FC<ShowcaseItemProps> = ({
 
             {!webglDemo && (
               <>
+                {/* Backing settings overlay */}
+                <div className={styles.bgControls} onMouseDown={(e) => e.stopPropagation()}>
+                  <button 
+                    className={imageBg === 'theme' ? styles.activeBgBtn : ''} 
+                    onClick={() => setImageBg('theme')}
+                    title="Колір теми"
+                  >
+                    <Contrast size={14} />
+                  </button>
+                  <button 
+                    className={imageBg === 'white' ? styles.activeBgBtn : ''} 
+                    onClick={() => setImageBg('white')}
+                    title="Білий"
+                  >
+                    <div className={`${styles.circlePreview} ${styles.circleWhite}`} />
+                  </button>
+                  <button 
+                    className={imageBg === 'dark' ? styles.activeBgBtn : ''} 
+                    onClick={() => setImageBg('dark')}
+                    title="Темний"
+                  >
+                    <div className={`${styles.circlePreview} ${styles.circleDark}`} />
+                  </button>
+                </div>
+
                 {/* Zoom overlay controls */}
                 <div className={styles.zoomControls} onMouseDown={(e) => e.stopPropagation()}>
                   <button onClick={handleZoomOut} disabled={zoom <= 1} title="Зменшити">

@@ -199,6 +199,125 @@
   fill: rgba(255, 255, 255, 0.55) !important;
 }
 
+.bgWhite {
+  background-color: #ffffff !important;
+  background-image: none !important;
+}
+
+.bgDark {
+  background-color: #0f172a !important;
+  background-image: none !important;
+}
+
+/* Floating background control panel in image container */
+.bgControls {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 0.25rem;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  z-index: 10;
+  transition: all var(--transition-normal);
+}
+
+.bgControls button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 26px;
+  height: 26px;
+  border-radius: calc(var(--radius-sm) - 2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  color: var(--text-secondary);
+}
+
+.bgControls button:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--primary);
+}
+
+.activeBgBtn {
+  background-color: var(--primary-light) !important;
+  color: var(--primary) !important;
+}
+
+.circlePreview {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+}
+
+.circleWhite {
+  background-color: #ffffff;
+}
+
+.circleDark {
+  background-color: #0f172a;
+}
+
+/* Mobile background configuration controls (rendered under the title) */
+.mobileBgControls {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobileBgControls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.4rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    margin: 0.5rem 1rem 1rem 1rem;
+    width: auto;
+  }
+
+  /* Hide the old floating controls inside the image wrapper on mobile */
+  .bgControls {
+    display: none !important;
+  }
+}
+
+.bgLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-right: 0.25rem;
+  margin-left: 0.25rem;
+}
+
+.mobileBgBtn {
+  background: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.mobileBgBtn:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--primary);
+}
+
 
 /* Zoom overlays */
 .zoomControls {
