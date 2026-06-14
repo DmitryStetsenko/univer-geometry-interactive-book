@@ -203,7 +203,6 @@ export const TopicDetailPage: React.FC = () => {
                   title="Зменшити"
                 >
                   <ZoomOut size={14} />
-                  <span>Зменшити</span>
                 </button>
                 <span className={styles.mobileZoomLevel}>{Math.round(zoom * 100)}%</span>
                 <button 
@@ -213,7 +212,6 @@ export const TopicDetailPage: React.FC = () => {
                   title="Збільшити"
                 >
                   <ZoomIn size={14} />
-                  <span>Збільшити</span>
                 </button>
                 <button 
                   className={styles.mobileBgBtn} 
@@ -222,7 +220,6 @@ export const TopicDetailPage: React.FC = () => {
                   title="Скинути"
                 >
                   <RotateCcw size={14} />
-                  <span>Скинути</span>
                 </button>
               </div>
             </>
