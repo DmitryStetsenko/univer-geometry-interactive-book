@@ -94,11 +94,24 @@ export const AboutPage: React.FC = () => {
           <li>
             <strong>Додавання метаданих та теорії в конфіг:</strong>
             <br />
-            Відкрийте файл <code>src/entities/topic/model/topics.ts</code>. Спочатку імпортуйте вихідний код Asymptote як сирий рядок за допомогою суфіксу <code>?raw</code>:
+            Відкрийте файл <code>src/entities/topic/model/topics.ts</code>. Для правильної інтеграції ресурсів виконайте дві речі:
+            <ul style={{ paddingLeft: '1.25rem', marginTop: '0.5rem', marginBottom: '0.5rem', listStyleType: 'disc' }}>
+              <li style={{ marginBottom: '0.25rem' }}>
+                <strong>Динамічний резолв SVG:</strong> Оскільки під час збірки Vite оптимізує, хешує та переміщує статичні асети, посилання на SVG-зображення потрібно створювати через <code>new URL('шлях_до_svg', import.meta.url).href</code>. Це гарантує правильне відображення ілюстрацій після деплою (наприклад, на GitHub Pages).
+              </li>
+              <li>
+                <strong>Імпорт сирого коду Asymptote:</strong> Імпортуйте вихідний код <code>.asy</code> як сирий рядок за допомогою суфіксу <code>?raw</code>. Це дозволяє уникнути ручного копіювання коду.
+              </li>
+            </ul>
+            Приклад оголошення на початку файлу <code>topics.ts</code>:
             <pre className={styles.codeBlock}>
-{`import myTopicStep1Code from '../../../shared/assets/asymptote/my_topic_step1.asy?raw';`}
+{`// 1. Динамічне вирішення шляху до SVG
+const myTopicStep1Url = new URL('../../../shared/assets/asymptote/my_topic_step1.svg', import.meta.url).href;
+
+// 2. Імпорт вихідного коду Asymptote як тексту
+import myTopicStep1Code from '../../../shared/assets/asymptote/my_topic_step1.asy?raw';`}
             </pre>
-            Потім додайте новий об'єкт теми у масив <code>topics</code>:
+            Після цього додайте новий об'єкт теми у масив <code>topics</code>:
             <pre className={styles.codeBlock}>
 {`{
   id: 'my-new-topic',
@@ -113,7 +126,7 @@ export const AboutPage: React.FC = () => {
     {
       title: 'Крок 1. Назва кроку',
       description: 'Опис першої ілюстрації.',
-      svgPath: new URL('../../../shared/assets/asymptote/my_topic_step1.svg', import.meta.url).href,
+      svgPath: myTopicStep1Url,
       asyCode: myTopicStep1Code
     }
   ]
